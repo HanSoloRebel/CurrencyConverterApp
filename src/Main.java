@@ -1,13 +1,17 @@
 public class Main {
     public static void main(String[] args) {
-        float rate = 6.5f;
-        float value = 100;
-        String[] currencies = new String[] {"RUB", "KZT"};
-        CurrencyConverter exchange = new CurrencyConverter();
+        GUI gui = new GUI();
+//        float value = 100;
+//        String[] currencies = new String[] {"RUB", "KZT"};
+//        UserInterface.getFrame();
+/*        Converter exchange = new Converter();
         exchange.setExchangeRate(rate);
-        exchange.setAmount(value);
-        exchange.setExchangeCurrencies(currencies);
-        String result = exchange.getExchange();
-        System.out.printf("%s.", result);
+        exchange.setAmount(gui.getAmountInput());
+        exchange.setExchangeCurrencies(gui.getSelectedCurrencies());
+        gui.setExchangeResult(exchange.getExchange());
+*/
+//        String result =
+//        System.out.printf("%s.", result);
+//        System.out.println(Arrays.toString(currencies));
     }
 }
