@@ -23,18 +23,24 @@ public class CurrencyConverter {
                 System.out.println(errorCode);
             }
         }
-        public static void setExchangeCurrencies(String[] currencies){
-            boolean valueError = false;
-            if (currencies.length != 2){
-                valueError = true;
+    public static void setExchangeCurrencies(String[] currencies){
+        boolean valueError = false;
+        if (currencies.length == 2){
+            for (String i : currencies){
+                if (!currenciesList.contains(i)){
+                    String errorCode1 = String.format("ValueError: the %s is not in currency list.", i);
+                    System.out.println(errorCode1);
+                    valueError = true;
+                }
             }
             if (!valueError){
                 exchangeCurrencies = currencies;
-            } else {
-                String errorCode2 = String.format("ValueError: two  currency values must be passed.");
-                System.out.println(errorCode2);
             }
+        } else {
+            String errorCode2 = String.format("ValueError: two  currency values must be passed.");
+            System.out.println(errorCode2);
         }
+    }
         public static String getExchange(){
             if ((exchangeRate != -1) &&  (amount != -1) && (exchangeCurrencies.length == 2)) {
                 float result = amount * exchangeRate;
