@@ -89,7 +89,6 @@ public class GUI extends JFrame implements ActionListener {
         } else {
             history = history + amountInput + " RUB = " + String.valueOf(res) + " " + selectedCurrency + "\n";
         }
-        System.out.println(history);
         historyField.setText(history);
         jPanel.revalidate();
     }
