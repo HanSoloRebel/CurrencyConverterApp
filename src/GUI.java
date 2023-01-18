@@ -11,7 +11,9 @@ public class GUI extends JFrame implements ActionListener {
     private static JButton button;
     private static JTextField amountField;
     private static JTextField resultField;
+    private static JTextArea historyField;
     private static JPanel jPanel;
+    private static String history = new String();
     private static JComboBox<String> jComboBox1;
     private static JComboBox<String> jComboBox2;
     GUI(){
@@ -36,6 +38,11 @@ public class GUI extends JFrame implements ActionListener {
         amountField.setText("value");
         amountField.setHorizontalAlignment(JTextField.TRAILING);
         jPanel.add(amountField);
+
+        historyField = new JTextArea();
+        historyField.setBackground(Color.gray);
+        historyField.setBounds(10,130,190,190);
+        jPanel.add(historyField);
 
         resultField = new JTextField(8);
 //        resultField.setPreferredSize(new Dimension(250,40));
@@ -77,6 +84,13 @@ public class GUI extends JFrame implements ActionListener {
 
     public static void setExchangeResult(float res) {
         resultField.setText(String.valueOf(res));
+        if (history.isEmpty()){
+            history = amountInput + " RUB = " + String.valueOf(res) + " " + selectedCurrency + "\n";
+        } else {
+            history = history + amountInput + " RUB = " + String.valueOf(res) + " " + selectedCurrency + "\n";
+        }
+        System.out.println(history);
+        historyField.setText(history);
         jPanel.revalidate();
     }
 
