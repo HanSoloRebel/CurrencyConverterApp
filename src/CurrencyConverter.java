@@ -4,8 +4,10 @@ import java.util.Map;
 
 public class CurrencyConverter {
     private static float exchangeRate = -1;
+    private static float base = -1;
     private static float amount = -1;
-    private static String[] exchangeCurrencies;
+    private static String exchangeCurrency;
+//    private static String exchangeCurrency;
     //    private static List<String> currenciesList = new ArrayList<>(asList("RUB", "CNY", "KZT", "BYN","TRY", "USD","UER");
     private static Map<String, String[]> currencyDictionary = new HashMap<>(){{
         put("RUB", new String[] {"Российский рубль", "Российского рубля"});
@@ -37,29 +39,35 @@ public class CurrencyConverter {
             System.out.println(errorCode);
         }
     }
-    public static void setExchangeCurrencies(String[] currencies){
+    public static void setBase(float value){
+        if (value >= 0 ) {
+            base = value;
+        }
+    }
+    public static void setExchangeCurrencies(String currency){
         boolean valueError = false;
-        if (currencies.length == 2){
-            for (String i : currencies){
+//        if (currencies.length == 2){
+//            for (String i : currencies){
 //                if (!currenciesList.contains(i)){
-                if (!(currencyDictionary.keySet()).contains(i)){
-                    String errorCode1 = String.format("ValueError: the %s is not in currency list.", i);
+//                if (!(currencyDictionary.keySet()).contains(currency)){
+        if (!ExchangeRate.getCurrenciesList().contains(currency)){
+                    String errorCode1 = String.format("ValueError: the %s is not in currency list.", currency);
                     System.out.println(errorCode1);
                     valueError = true;
                 }
-            }
+//            }
             if (!valueError){
-                exchangeCurrencies = currencies;
+                exchangeCurrency = currency;
             }
-        } else {
+        } /*else {
             String errorCode2 = String.format("ValueError: two  currency values must be passed.");
             System.out.println(errorCode2);
-        }
-    }
+        }*/
+//    }
     public static float getExchange(){
         float result = 0;
-        if ((exchangeRate != -1) &&  (amount != -1) && (exchangeCurrencies.length == 2)) {
-            result = amount * exchangeRate;
+        if ((exchangeRate != -1) &&  (amount != -1) && (base != -1) && (exchangeCurrency.length() != 0)) {
+            result = (amount * base) / exchangeRate;
 //            System.out.printf("1 %s = %s %s\nЦБ РФ %s\n", currencyDictionary.get(exchangeCurrencies[0])[0], exchangeRate, currencyDictionary.get(exchangeCurrencies[1])[1], UserInterface.getDate());
 //            String str = String.format("%s %s = %s %s", amount, exchangeCurrencies[0], result, exchangeCurrencies[1]);
         }/* else {
